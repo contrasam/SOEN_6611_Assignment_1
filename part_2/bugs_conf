@@ -1,0 +1,6 @@
+url=https://hibernate.atlassian.net/browse/
+project_tag=WEBSITE
+bug_start=250
+bug_end=280
+max_timeout_secs=10
+root_directory=/home/pr_danie/bugs/
