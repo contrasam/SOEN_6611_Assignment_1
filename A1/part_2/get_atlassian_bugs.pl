@@ -3,15 +3,9 @@ use strict;
 use warnings;
 
 use lib './LWP-Protocol-https-6.06/lib';
-use lib './URI-Find-20140709/lib';
-use lib './HTML-Tree-5.03/lib';
-use lib './Regexp-Common-2013031301/lib';
 
 use LWP;
 use LWP::Simple;
-use URI::Find;
-use HTML::TreeBuilder;
-use Encode;
 use URI::URL;
 
 my $number_of_args = $#ARGV + 1;
@@ -43,15 +37,20 @@ if(exists($config{"url"}) && exists($config{"project_tag"}) && exists($config{"b
     chomp $last_index;
     my $root_directory = $config{"root_directory"};
     chomp $root_directory;
+    print "Directory to store bug information: ".$root_directory."\n";
     my $sleep_time = $config{"max_timeout_secs"};
     chomp $sleep_time;
-    #TODO: Find if the url ends with / if not add /
     my $browser = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
     
     do
     {
       my $url_obj = new URI::URL "$url";
-      my $complete_url = $url.$project_tag."-".$start_index;
+      my $complete_url;
+      if ($url_obj->path ne "/browse/"){
+         $complete_url = $url_obj->scheme."://".$url_obj->host."/browse/".$project_tag."-".$start_index;
+      }else{
+         $complete_url = $url_obj->scheme."://".$url_obj->host.$url_obj->path.$project_tag."-".$start_index;
+      }
       print "BUG URL: ".$complete_url."\n";
       my $response = $browser->get( $complete_url );
       die "Can't get $url -- ", $response->status_line unless $response->is_success;
@@ -63,23 +62,8 @@ if(exists($config{"url"}) && exists($config{"project_tag"}) && exists($config{"b
       $start_index = $start_index + 1;
       sleep($sleep_time);
     }while( $start_index <=  $last_index);  
-    
 }else{
     print "\nError: Invalid configuration file supplied.\n";
     exit;
-}
-
-sub uniq {
-    my %seen;
-    grep !$seen{$_}++, @_;
-}
-
-sub remove_git_extension {
-   my $url = $_[0];
-   my $last_four = substr $url, -4;
-   if($last_four eq ".git"){
-     $url = substr $url, 0, -4;
-   }
-   return $url;
 }
 

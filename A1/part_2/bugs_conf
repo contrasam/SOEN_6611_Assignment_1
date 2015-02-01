@@ -1,6 +1,6 @@
-url=https://hibernate.atlassian.net/browse/
+url=https://hibernate.atlassian.net/browse
 project_tag=WEBSITE
-bug_start=270
-bug_end=280
-max_timeout_secs=1
+bug_start=210
+bug_end=220
+max_timeout_secs=20
 root_directory=/home/pr_danie/bugs/
