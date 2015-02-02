@@ -53,7 +53,7 @@ if(exists($config{"url"}) && exists($config{"project_tag"}) && exists($config{"b
       }
       print "BUG URL: ".$complete_url."\n";
       my $response = $browser->get( $complete_url );
-      die "Can't get $url -- ", $response->status_line unless $response->is_success;
+      die "Can't get $complete_url -- ", $response->status_line unless $response->is_success;
       my $page = $response->content;
       my $file_path = $root_directory."/".$project_tag."-".$start_index.".txt";
       open my $fh, ">>$file_path" or die $!;

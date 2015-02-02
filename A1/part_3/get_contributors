@@ -1,0 +1,3 @@
+#!/bin/bash
+
+perl get_contributors.pl
