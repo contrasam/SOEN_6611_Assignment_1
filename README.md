@@ -6,28 +6,28 @@ Instructions to run part_1:
 
 you can run the part_1 by running the command:
 
-# sh get_git git_conf
+_sh get_git git_conf_
 
 or
 
-# perl get_git.pl git_conf
+_perl get_git.pl git_conf_
 
 Instructions to run part_2:
 
 you can run the part_2 by running the command:
 
-# sh get_atlassian_bugs bugs_conf
+_sh get_atlassian_bugs bugs_conf_
 
 or
 
-# perl get_atlassian_bugs.pl bugs_conf
+_perl get_atlassian_bugs.pl bugs_conf_
 
 Instructions to run part_3:
 
 you can run the part_3 by running the command:
 
-# sh get_contributors
+_sh get_contributors_
 
 or
 
-# perl get_contributors.pl
+_perl get_contributors.pl_
